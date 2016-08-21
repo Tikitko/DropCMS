@@ -1,5 +1,6 @@
 # DropCMS
-Ver. 0.0.2
+Ver. 0.0.3
 
 Simple Content Management System aims to expand by the user!
+
 Простая система управления сайтом нацелена на расширение со стороны пользователя!
