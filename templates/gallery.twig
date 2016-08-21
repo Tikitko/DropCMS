@@ -1,0 +1,12 @@
+<div class="gallery">
+    <h2 class="gallery-title">{{ images.title }}</h2>
+    <div class="gallery-text">{{ images.text }}</div>
+    <div class="gallery-list">
+{% for image in images.list %}
+        <img class="image" alt="{{ image.title }}" src="{{ image.link }}">
+{% endfor %}
+    </div>
+    <div class="gallery-pages">
+{% set pages = images.pages_links %}{% include "pages.twig" %}
+    </div>
+</div>

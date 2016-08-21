@@ -1,0 +1,5 @@
+{% for page in pages %}
+{% if page.active == true %}<a class="link active" href="{{ page.link }}">{{ page.title }}</a>
+{% else %}<span class="link">{{ page.title }}</span>
+{% endif %}
+{% endfor %}

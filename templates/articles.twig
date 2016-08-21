@@ -6,21 +6,19 @@
 </div>
 {% else %}
 <div class="articles">
-    <h2 class="articles-title">{{ article.articles_title }}</h2>
+    <h2 class="articles-title">{{ articles.title }}</h2>
     <div class="articles-list">
-        {% for article in article.articles_list %}
+{% for article in articles.list %}
         <div class="article-short">
             <h3 class="article-title-short">{{ article.title }}</h3>
             <div class="article-time-short">{{ article.time }}</div>
             <div class="article-text-short">{{ article.text }}</div>
             <a href="{{ article.link }}" class="article-link">--></a>
         </div>
-        {% endfor %}
+{% endfor %}
     </div>
     <div class="articles-pages">
-        {% for page in article.articles_pages_links %}
-        <a href="{{ page.link }}">{{ page.title }}</a>
-        {% endfor %}
+{% set pages = articles.pages_links %}{% include "pages.twig" %}
     </div>
 </div>
 {% endif %}

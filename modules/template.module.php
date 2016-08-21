@@ -1,17 +1,17 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.2
- *   (c) 2016 Bykov Nikita
+ *   Ver. 0.0.3
+ *   (c) 2016 Nikita Bykov
  *   template.module.php
  *
  */
-    class module
-    {
-        public $args;
-        public function __construct($args = array()) {$this->args = (array)$args;}
-        public function main() : array {
-            $array = BasePage::create();
-            return (array) $array;
-        }
+class module
+{
+    public $args;
+    public function __construct(array $args=array()) {$this->args = $args;}
+    public function main():array {
+        $array = PageConstructors::BasePageCreate();
+        return (array) $array;
     }
+}
