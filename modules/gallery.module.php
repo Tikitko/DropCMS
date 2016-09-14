@@ -1,15 +1,22 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.3
+ *   Ver. 0.0.4
  *   (c) 2016 Nikita Bykov
  *   gallery.module.php
  *
  */
 class module
 {
+    public const MODULE_ID = 3;
+    public const MODULE_TITLE = "Gallery Module";
+    public const MODULE_DESCRIPTION = "Gallery module for DropCMS";
+    public const MODULE_AUTHOR = "Nikita Bykov";
+    public const MODULE_VERSION = "0.0.4";
     public $args;
-    public function __construct(array $args=array()) {$this->args = $args;}
+    public function __construct(array $args=array()) {
+        $this->args = $args;
+    }
     public function main():array {
         $error_load = Localization::ERROR_GALLERY_MODULE_LOAD_DIR;
         if(!isset($this->args['gallery_dir'])||!is_dir($this->args['gallery_dir'])) die($error_load);

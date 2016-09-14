@@ -18,7 +18,8 @@
 {% endfor %}
     </div>
     <div class="articles-pages">
-{% set pages = articles.pages_links %}{% include "pages.twig" %}
+{% set pages = articles.pages_links %}
+{% include "pages.twig" %}
     </div>
 </div>
 {% endif %}

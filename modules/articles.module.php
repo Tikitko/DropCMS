@@ -1,26 +1,33 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.3
+ *   Ver. 0.0.4
  *   (c) 2016 Nikita Bykov
  *   articles.module.php
  *
  */
 class module
 {
+    public const MODULE_ID = 1;
+    public const MODULE_TITLE = "Articles Module";
+    public const MODULE_DESCRIPTION = "Articles module for DropCMS";
+    public const MODULE_AUTHOR = "Nikita Bykov";
+    public const MODULE_VERSION = "0.0.4";
     public $args;
-    public function __construct(array $args=array()) {$this->args = $args;}
+    public function __construct(array $args=array()) {
+        $this->args = $args;
+    }
     public function main():array {
         $error_load = Localization::ERROR_ARTICLES_MODULE_LOAD_DIR;
         if(!isset($this->args['articles_dir'])||!is_dir($this->args['articles_dir'])) die($error_load);
         $articles_dir = $this->args['articles_dir'];
-        $get_article = isset($_GET['a'])?$_GET['a']:'';
-        $base_link = PageConstructors::GetBaseLink();
+        $get_article = isset($_GET['a'])?(string)$_GET['a']:'';
+        $base_link = PageConstructors::BaseLinkCreate();
         $array = PageConstructors::BasePageCreate();
         $array['data']['content_tpl'] = 'articles.twig';
         PageConstructors::ToTitleAdd($array,Localization::ARTICLES_MODULE_TITLE);
         $relevant_files = glob($articles_dir.'*__'.str_replace(array('*','__'),'',$get_article).'.json');
-        $article_file = !empty($get_article)?basename(current($relevant_files)):'';
+        $article_file = !empty($get_article)?(string)basename(current($relevant_files)):'';
         if(!empty($article_file)&&is_file($articles_dir.$article_file)) {
             $article_data = json_decode(file_get_contents($articles_dir.$article_file),true);
             if(!empty($article_data['title'])) PageConstructors::ToTitleAdd($array,$article_data['title']);
@@ -40,7 +47,7 @@ class module
             $articles_files = array();
             foreach($articles_dir_all_files as $value) {
                 if(in_array($value,array('.','..'))||is_dir($articles_dir.$value)) continue;
-                if(substr($value, strrpos($value,'.') + 1)!='json') continue;
+                if(substr($value,strrpos($value,'.')+1)!='json') continue;
                 $articles_files[] = $value;
             }
             $start_article = ($get_page-1)*$on_page;
@@ -53,15 +60,17 @@ class module
                 }
                 $article_data = json_decode(file_get_contents($articles_dir.$articles_files[$i]),true);
                 $timestamp = (int)(explode('__',$article_file)[0]);
-                $main_link = 'a'.'='.preg_replace(array('/.json/','/.*?__/'),array('',''),$articles_files[$i]);
+                $title = substr(PageConstructors::ClearString($article_data['article_title']),0,150);
+                $text = substr(PageConstructors::ClearString($article_data['article_text']),0,400).'...';
+                $main_link = 'a'.'='.preg_replace(array('/.json/','/.*?__/'),'',$articles_files[$i]);
                 $array['data']['articles']['list'][$j]['time'] = date("Y-m-d H:i",$timestamp);
-                $array['data']['articles']['list'][$j]['title'] = $article_data['article_title'];
-                $array['data']['articles']['list'][$j]['text'] = $article_data['article_text'];
+                $array['data']['articles']['list'][$j]['title'] = $title;
+                $array['data']['articles']['list'][$j]['text'] = $text;
                 $array['data']['articles']['list'][$j]['link'] = $base_link.$main_link;
                 $j++;
                 if($i==($end_article-1)||!isset($articles_files[$i+1])){
                     $pages_temp = count($articles_files)/$on_page;
-                    $pages_count = (int)(count($articles_files)%$on_page == 0?$pages_temp:$pages_temp+1);
+                    $pages_count = (int)(count($articles_files)%$on_page==0?$pages_temp:$pages_temp+1);
                     PageConstructors::PagesNavAdd($array,'articles',$get_page,$pages_count);
                 }
             }

@@ -1,20 +1,27 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.3
+ *   Ver. 0.0.4
  *   (c) 2016 Nikita Bykov
  *   static.module.php
  *
  */
 class module
 {
+    public const MODULE_ID = 4;
+    public const MODULE_TITLE = "Static Module";
+    public const MODULE_DESCRIPTION = "Static module for DropCMS";
+    public const MODULE_AUTHOR = "Nikita Bykov";
+    public const MODULE_VERSION = "0.0.4";
     public $args;
-    public function __construct(array $args=array()) {$this->args = $args;}
+    public function __construct(array $args=array()) {
+        $this->args = $args;
+    }
     public function main():array {
         $error_load = Localization::ERROR_STATIC_MODULE_LOAD_DIR;
         if(!isset($this->args['pages_dir'])||!is_dir($this->args['pages_dir'])) die($error_load);
         $pages_dir = $this->args['pages_dir'];
-        $get_page = isset($_GET['page'])?$_GET['page']:'';
+        $get_page = isset($_GET['page'])?(string)$_GET['page']:'';
         $array = PageConstructors::BasePageCreate();
         $array['data']['content_tpl'] = 'static.twig';
         $default_page_path = $pages_dir.Config::STATIC_MODULE_DEFAULT_PAGE.'.json';
