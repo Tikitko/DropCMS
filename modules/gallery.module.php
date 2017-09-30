@@ -1,8 +1,8 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
+ *   Ver. 0.1
+ *   (c) 2017 Nikita Bykov
  *   gallery.module.php
  *
  */
@@ -12,7 +12,7 @@ class module
     public const MODULE_TITLE = "Gallery Module";
     public const MODULE_DESCRIPTION = "Gallery module for DropCMS";
     public const MODULE_AUTHOR = "Nikita Bykov";
-    public const MODULE_VERSION = "0.0.4";
+    public const MODULE_VERSION = "0.1";
     public $args;
     public function __construct(array $args=array()) {
         $this->args = $args;

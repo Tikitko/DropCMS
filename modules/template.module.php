@@ -1,8 +1,8 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
+ *   Ver. 0.1
+ *   (c) 2017 Nikita Bykov
  *   template.module.php
  *
  */

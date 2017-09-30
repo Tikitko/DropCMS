@@ -1,8 +1,8 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
+ *   Ver. 0.1
+ *   (c) 2017 Nikita Bykov
  *   Core.class.php
  *
  */
@@ -10,7 +10,7 @@ class Core {
     public const TITLE = "DropCMS CORE";
     public const DESCRIPTION = "The main CORE component of the DropCMS";
     public const AUTHOR = "Nikita Bykov";
-    public const VERSION = "0.0.4";
+    public const VERSION = "0.1";
 
     private const CORE_COMPONENTS_DIR = 'Components/';
     private const CORE_TWIG_DIR = 'Twig/';
@@ -34,8 +34,6 @@ class Core {
     public function __construct(string $modules_dir='',string $templates_dir='') {
         $this->MODULES_DIR = $modules_dir;
         $this->TEMPLATES_DIR = $templates_dir;
-        if(empty($this->MODULES_DIR)||!is_dir($this->MODULES_DIR)) die(Localization::ERROR_LOAD_MODULES_DIR);
-        if(empty($this->TEMPLATES_DIR)||!is_dir($this->TEMPLATES_DIR)) die(Localization::ERROR_LOAD_TEMPLATES_DIR);
         $config_path = self::DIR.self::CORE_CONFIG_FILE;
         if(is_file($config_path)) require_once $config_path;
         if(!class_exists('Config')) die('Config not loaded!');
@@ -50,6 +48,8 @@ class Core {
             $class_path = self::DIR.self::CORE_COMPONENTS_DIR.$class.self::EXPANSION_CLASS;
             if(file_exists($class_path)) include_once $class_path;
         });
+		if(empty($this->MODULES_DIR)||!is_dir($this->MODULES_DIR)) die(Localization::ERROR_LOAD_MODULES_DIR);
+        if(empty($this->TEMPLATES_DIR)||!is_dir($this->TEMPLATES_DIR)) die(Localization::ERROR_LOAD_TEMPLATES_DIR);
     }
 
     private function get_module_file():string {

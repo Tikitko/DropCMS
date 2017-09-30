@@ -1,13 +1,13 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
+ *   Ver. 0.1
+ *   (c) 2017 Nikita Bykov
  *   index.php
  *
  */
-require_once 'Libs/Core.class.php';
-$core = new Core('modules/','templates/');
+require_once 'engine/Core.class.php';
+$core = new Core(__DIR__.'/modules/',__DIR__.'/templates/');
 $core->constructor(array(
     'articles.module.php' => array('articles_dir' => 'content/articles/'),
     'gallery.module.php' => array('gallery_dir' => 'content/gallery/'),

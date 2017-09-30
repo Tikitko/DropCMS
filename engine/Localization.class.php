@@ -1,8 +1,8 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
+ *   Ver. 0.1
+ *   (c) 2017 Nikita Bykov
  *   Localization.class.php
  *
  */
@@ -22,7 +22,7 @@ class Localization
 
 
     /* OTHER LOCALIZATION */
-    const CONSTRUCTOR_ERROR_404_TITLE = 'Ошибка 404!';
+    const CONSTRUCTOR_ERROR_404_TITLE = 'Ошибка 404';
     const CONSTRUCTOR_ERROR_404_TEXT = 'Страница не найдена!';
 
     const CONSTRUCTOR_NAVIGATION_PAGE = 'Страница';

@@ -1,8 +1,8 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
+ *   Ver. 0.1
+ *   (c) 2017 Nikita Bykov
  *   articles.module.php
  *
  */
@@ -12,7 +12,7 @@ class module
     public const MODULE_TITLE = "Articles Module";
     public const MODULE_DESCRIPTION = "Articles module for DropCMS";
     public const MODULE_AUTHOR = "Nikita Bykov";
-    public const MODULE_VERSION = "0.0.4";
+    public const MODULE_VERSION = "0.1";
     public $args;
     public function __construct(array $args=array()) {
         $this->args = $args;
@@ -60,8 +60,8 @@ class module
                 }
                 $article_data = json_decode(file_get_contents($articles_dir.$articles_files[$i]),true);
                 $timestamp = (int)(explode('__',$article_file)[0]);
-                $title = substr(PageConstructors::ClearString($article_data['article_title']),0,150);
-                $text = substr(PageConstructors::ClearString($article_data['article_text']),0,400).'...';
+                $title = mb_substr(PageConstructors::ClearString($article_data['article_title']),0,150);
+                $text = mb_substr(PageConstructors::ClearString($article_data['article_text']),0,400).'...';
                 $main_link = 'a'.'='.preg_replace(array('/.json/','/.*?__/'),'',$articles_files[$i]);
                 $array['data']['articles']['list'][$j]['time'] = date("Y-m-d H:i",$timestamp);
                 $array['data']['articles']['list'][$j]['title'] = $title;

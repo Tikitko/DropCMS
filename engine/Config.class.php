@@ -1,11 +1,4 @@
 <?php
-/*
- *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
- *   Config.class.php
- *
- */
 class Config
 {
     /* CORE SETTINGS */
@@ -13,7 +6,7 @@ class Config
     const MODULE_DEFAULT = 'static';
 
     const TWIG_LOADER_OPTIONS = array();
-    const TWIG_ENVIRONMENT_OPTIONS = array(); // 'cache' => 'content/cache/'
+    const TWIG_ENVIRONMENT_OPTIONS = array(/* 'cache' => 'content/cache/' */);
 
 
     /* OTHER SETTINGS */

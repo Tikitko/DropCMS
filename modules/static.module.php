@@ -1,8 +1,8 @@
 <?php
 /*
  *   DropCMS
- *   Ver. 0.0.4
- *   (c) 2016 Nikita Bykov
+ *   Ver. 0.1
+ *   (c) 2017 Nikita Bykov
  *   static.module.php
  *
  */
@@ -12,7 +12,7 @@ class module
     public const MODULE_TITLE = "Static Module";
     public const MODULE_DESCRIPTION = "Static module for DropCMS";
     public const MODULE_AUTHOR = "Nikita Bykov";
-    public const MODULE_VERSION = "0.0.4";
+    public const MODULE_VERSION = "0.1";
     public $args;
     public function __construct(array $args=array()) {
         $this->args = $args;
@@ -36,7 +36,11 @@ class module
             if(!empty($page_data['keywords'])) $array['data']['keywords'] = $page_data['keywords'];
             $array['data']['static']['title'] = $page_data['page_title'];
             $array['data']['static']['text'] = $page_data['page_text'];
-        } else PageConstructors::Error404Add($array,'static');
+        } else {
+			$array['data']['static']['title'] = "";
+            $array['data']['static']['text'] = "";
+			PageConstructors::Error404Add($array,'static');
+		}
         return (array) $array;
     }
 }
